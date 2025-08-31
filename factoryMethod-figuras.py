@@ -1,6 +1,3 @@
-# Patrón Factory Method - Fábrica de Formas Geométricas
-# Archivo: factory_formas.py
-
 import math
 from abc import ABC, abstractmethod
 
@@ -14,7 +11,6 @@ class Forma(ABC):
     def mostrar_info(self):
         pass
 
-# Clases concretas de formas
 class Circulo(Forma):
     def __init__(self, radio):
         self.radio = radio
@@ -46,7 +42,6 @@ class Triangulo(Forma):
     def mostrar_info(self):
         return f"Triángulo - Base: {self.base}, Altura: {self.altura}, Área: {self.calcular_area():.2f}"
 
-# Factory Method
 class FabricaFormas:
     @staticmethod
     def crear_forma(tipo_forma, *args):
@@ -63,7 +58,7 @@ class FabricaFormas:
     def tipos_disponibles():
         return ["circulo", "cuadrado", "triangulo"]
 
-# Función de demostración
+
 def main():
     print("=== Demostración Patrón Factory Method ===")
     
@@ -72,33 +67,26 @@ def main():
     print(f"Tipos de formas disponibles: {fabrica.tipos_disponibles()}")
     print()
     
-    # Crear diferentes formas usando la fábrica
     formas = []
     
-    # Crear círculo
     circulo = fabrica.crear_forma("circulo", 5)
     formas.append(circulo)
     
-    # Crear cuadrado
     cuadrado = fabrica.crear_forma("cuadrado", 4)
     formas.append(cuadrado)
     
-    # Crear triángulo
     triangulo = fabrica.crear_forma("triangulo", 6, 8)
     formas.append(triangulo)
     
-    # Mostrar información de todas las formas
     print("Formas creadas:")
     for i, forma in enumerate(formas, 1):
         print(f"{i}. {forma.mostrar_info()}")
     
     print()
     
-    # Calcular área total
     area_total = sum(forma.calcular_area() for forma in formas)
     print(f"Área total de todas las formas: {area_total:.2f}")
     
-    # Intentar crear una forma no soportada
     try:
         forma_invalida = fabrica.crear_forma("hexagono", 5)
     except ValueError as e:
